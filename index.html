@@ -6,50 +6,91 @@
 <style>
 body{
   margin:0;
-  height:100vh;
-  background:linear-gradient(#38bdf8,#22c55e);
+  background:#38bdf8;
   font-family:sans-serif;
+  overflow:hidden;
+}
+#menu,#game{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
   display:flex;
   justify-content:center;
   align-items:center;
 }
+#game{display:none;}
 .card{
-  background:rgba(0,0,0,0.6);
+  background:rgba(0,0,0,.6);
   color:white;
   padding:40px;
   border-radius:20px;
   text-align:center;
-  width:300px;
 }
-h1{
-  margin:0 0 10px;
+#player{
+  width:40px;height:40px;
+  background:orange;
+  position:absolute;
+  top:50%;left:50%;
+  border-radius:50%;
 }
-button{
-  margin-top:20px;
-  padding:12px 25px;
-  font-size:18px;
-  border:none;
-  border-radius:10px;
-  background:#facc15;
-  cursor:pointer;
+.btn{
+  position:absolute;
+  bottom:30px;
+  width:60px;height:60px;
+  border-radius:50%;
+  background:rgba(0,0,0,.5);
+  color:white;
+  font-size:24px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  user-select:none;
 }
-button:active{
-  transform:scale(0.95);
-}
+#left{left:30px;}
+#right{left:110px;}
+#up{right:110px;}
+#down{right:30px;}
 </style>
 </head>
 
 <body>
+
+<div id="menu">
   <div class="card">
     <h1>🔥 NGỌC RỒNG MINI</h1>
-    <p>Game do tôi tự làm trên iPhone</p>
+    <p>Demo điều khiển cảm ứng</p>
     <button onclick="start()">▶ BẮT ĐẦU</button>
   </div>
+</div>
+
+<div id="game">
+  <div id="player"></div>
+  <div class="btn" id="left">◀</div>
+  <div class="btn" id="right">▶</div>
+  <div class="btn" id="up">▲</div>
+  <div class="btn" id="down">▼</div>
+</div>
 
 <script>
+let x=window.innerWidth/2,y=window.innerHeight/2;
+const player=document.getElementById("player");
+
 function start(){
-  alert("Game sẽ sớm cập nhật 😎");
+  menu.style.display="none";
+  game.style.display="block";
 }
+
+function move(dx,dy){
+  x+=dx;y+=dy;
+  player.style.left=x+"px";
+  player.style.top=y+"px";
+}
+
+left.ontouchstart=()=>move(-10,0);
+right.ontouchstart=()=>move(10,0);
+up.ontouchstart=()=>move(0,-10);
+down.ontouchstart=()=>move(0,10);
 </script>
+
 </body>
 </html>
